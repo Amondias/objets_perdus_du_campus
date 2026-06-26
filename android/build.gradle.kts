@@ -3,6 +3,13 @@ allprojects {
         google()
         mavenCentral()
     }
+    subprojects {
+        afterEvaluate {
+            extensions.findByType<com.android.build.gradle.BaseExtension>()?.apply {
+                compileSdkVersion(36)
+            }
+        }
+    }
 }
 
 val newBuildDir: Directory =

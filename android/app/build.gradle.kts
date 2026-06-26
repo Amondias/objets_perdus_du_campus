@@ -1,13 +1,25 @@
 plugins {
     id("com.android.application")
+    // START: FlutterFire Configuration
+    id("com.google.gms.google-services")
+    // END: FlutterFire Configuration
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
     namespace = "com.example.objets_perdus_du_campus"
-    compileSdk = flutter.compileSdkVersion
+
+    // Force a recent compileSdk/targetSdk because some dependencies require compileSdk >= 34.
+    // This fixes Gradle error: "is currently compiled against android-33".
+    compileSdk = 36
+
+    // AGP 9+ (android.newDsl=true) deprecates/moves parts of the old DSL.
+    // We set targetSdk via defaultConfig below (targetSdk = flutter.targetSdkVersion).
+
+
     ndkVersion = flutter.ndkVersion
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
